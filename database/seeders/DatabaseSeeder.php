@@ -1,22 +1,45 @@
 <?php
-
+ 
 namespace Database\Seeders;
-
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+ 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
+use function Laravel\Prompts\table;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeders.
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        DB::table('users')->insert([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => 'password',
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        for ($x = 0; $x <=10; $x++){
+            $name_input = 'name' + '$x';
+            $email_input = 'email' + '$x' + '@email.com';
+            $password_input = 'password' + '$x';
+
+            DB::table('users')->insert([
+            'name' => $name_input,
+            'email' => $email_input,
+            'password' => $password_input,
+            ]);
+
+        }
+
+    
     }
+
+    
+        
+    
+
 }
