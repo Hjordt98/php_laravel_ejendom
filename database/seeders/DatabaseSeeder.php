@@ -11,11 +11,16 @@ use function Laravel\Prompts\table;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Run the database seeders.
-     */
+    
     public function run(): void
     {
+
+        $this->call([
+            CompaniesSeeder::class,
+            EmployeeSeeder::class,
+        ]);
+
+
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@admin.com',
@@ -23,23 +28,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         for ($x = 0; $x <=10; $x++){
-            $name_input = 'name' + '$x';
-            $email_input = 'email' + '$x' + '@email.com';
-            $password_input = 'password' + '$x';
+            $name_input_employee = sprintf("name_user_$x",$x);
+            $email_input_employee = sprintf("email_user_$x@gmail.com,$x");
+            $password_input = sprintf("password_user_$x, $x");
 
             DB::table('users')->insert([
-            'name' => $name_input,
-            'email' => $email_input,
+            'name' => $name_input_employee,
+            'email' => $email_input_employee,
             'password' => $password_input,
             ]);
-
         }
 
-    
     }
-
-    
-        
-    
 
 }
